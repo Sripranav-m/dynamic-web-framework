@@ -1,0 +1,87 @@
+{% extends "loggedin.html" %}
+{% block contents %}
+{% load static %}
+<div id="maindivforcarousel">
+<div class="container" ><hr style='height:1px;border:none;color:#333;background-color:#333;margin:100px;margin-top:30px;margin-bottom:10px' >
+	<div id="demo" class="carousel slide" data-ride="carousel" style="width:800px;margin-top:20px;margin-left:150px;margin-bottom:20px;">
+
+  		<ul class="carousel-indicators">
+		  	{% for item in images %}
+    			<li data-target="#demo" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+			{% endfor %} 
+  		</ul>
+
+  		<div class="carousel-inner">
+		{% for item in images %}
+			{% if forloop.first %}
+            	<div class="carousel-item active">
+                    <img src="{{ item.image.url }}" width="900" height="550">
+					<div class="carousel-caption">
+    					<h3>{{ item.name }}</h3>
+  					</div> 
+            	</div> 
+			{% else %}
+				<div class="carousel-item ">
+                    <img src="{{ item.image.url }}" width="900" height="550"> 
+					<div class="carousel-caption">
+    					<h3>{{ item.name }}</h3>
+  					</div>
+            	</div>
+			{% endif %}
+    	{% endfor %} 
+		</div>
+
+		<a class="carousel-control-prev" href="#demo" data-slide="prev">
+    		<span class="carousel-control-prev-icon"></span>
+		</a>
+		<a class="carousel-control-next" href="#demo" data-slide="next">
+    		<span class="carousel-control-next-icon"></span>
+		</a>
+	</div>
+	<hr style='height:1px;border:none;color:#333;background-color:#333;margin:100px;margin-top:10px;' >
+</div>
+</div>
+<div class="container"> 
+<br><br>
+<div>
+	<button type="button" class="btn btn-warning" data-toggle="modal" id="createformbuttonmodal" data-target="#ModalLong" style="margin-left:480px;color:black;">
+  		ADD TO CAROUSEL
+	</button>
+	<br>
+	<br>
+	<button onclick="showcarousel_sourcecode()" class="btn btn-success" style=" margin-left:498px; color:black; ">SOURCE CODE	</button>
+	<textarea   rows='30' cols='156' id='textareacarousel' style='display:none;' name='area'> </textarea>
+</div>
+<div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  	<div class="modal-dialog modal-lg" role="document" style="width:100%">
+    	<div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="exampleModalLongTitle">"CUSTOMIZE YOUR CAROUSEL"</h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+      	<div class="modal-body">
+        	<form action="{% url 'carousel' %}" method='POST' enctype="multipart/form-data">
+				{% csrf_token %}
+          		<div id="yourformf">
+            		<div class="inputfieldsf" >
+						NAME :<br> <input type="text" class='nameofcarousel form-control form-horizontal form-control-lg' name='textofcarousel' required><br>
+						<hr style='height:1px;border:none;color:#333;background-color:#333;' >
+						FILE :<br> <input type="file" class='carouselfileinput  form-control form-horizontal form-control-lg' name="fileofcarousel" required><br>
+						<hr style='height:1px;border:none;color:#333;background-color:#333;' >
+            		</div>
+          		</div>      
+          		<div class="modal-footer">
+           			<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+          			<input type="submit" class="btn btn-outline-success" value="submit" >
+          		</div>
+        	</form>
+      	</div>
+    	</div>
+  	</div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "loggedin.html" %}
+{% block contents %}
+
+<form  action="{% url 'createmenu' %}" method='POST' id="menuform" >
+	{% csrf_token %}
+	<div id="menudiv">
+	<br>
+		<label for='mainheading'><strong style="color:black;font-size:25px;">NAME:</strong></label>
+		<input type='text' value='{{ mainheading }}' class='nameofmenus form-control form-horizontal form-control-lg' id="mainheading" name='mainheading' style='width:300px;' required>
+		<input type="button" onclick="newitem()" value="&#10133;" class=" btn btn-warning btn-lg" data-toggle="modal" data-target="#ModalLongmenu">
+		<div id="displaymenu">
+			{{ insert_code | safe }}
+		</div>
+		<input type="submit" value="&#10004;" class="clicktosubmit btn btn-success btn-lg" name={{ key }} >
+	</div>
+	<div id="menucodediv">
+		<div style="display:none;" id="number" >
+	    	{{ num }}
+		</div>
+		<br>
+		<button type="button" onclick="showmenucode()" class="btn btn-outline-info" style="margin-left:20px;color:white;">
+  		SOURCE CODE
+		</button><br>
+		<span class="displaymenu"  style="display:none;"><strong><i style="font-size:20px;">HTML :</i></strong><textarea  rows='15' cols='156' id='textarea' style='display:block;' name='area'>{{ displaycode }}</textarea></span>
+		<span class="displaymenu"  style="display:none;"><strong><i>CSS :</i></strong><textarea  rows='13' cols='20' id='textarea' style='display:block;' name='area'>{{ displaycss }}</textarea></span>
+		<span class="displaymenu"  style="display:none;"><strong><i>JAVASCRIPT (JQUERY) :</i></strong><textarea  rows='9' cols='51' id='textarea' style='display:block;' name='area'>{{ displayjs }}</textarea></span>
+		<div class="modal fade" id="ModalLongmenu" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+  			<div class="modal-dialog modal-lg" role="document" style="width:125%">
+    			<div class="modal-content">
+    	  			<div class="modal-header">
+       					<h5 class="modal-title" id="exampleModalLongTitle">MENU</h5>
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        				</button>
+      				</div>
+
+      				<div class="modal-body" id="menu">
+
+					...
+
+      				</div>
+
+
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-lg btn-outline-danger" data-dismiss="modal">Close</button>
+        				<input type="submit" class="clicktosubmit btn btn-lg btn-outline-success">
+      				</div>
+				</div>
+    		</div>
+  		</div>
+	</div>
+</form>
+{% endblock %}

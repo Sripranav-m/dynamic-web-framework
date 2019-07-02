@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="UTF-8">
+    	<title>ITCRATS</title>
+    	<meta name="author" content="name">
+    	<meta name="description" content="description here">
+    	<meta name="keywords" content="keywords,here">
+    	<link rel="stylesheet" type='text/css' href="{% static 'loginsignup.css'%}">
+    	<link rel="stylesheet" type='text/css' href="{% static 'css/bootstrap.min.css'%}">
+  	</head>
+  	<body>
+    	<form action="{% url 'login' %}" method='POST'>
+    	{% csrf_token %}
+			<div class="container">
+				<div class="d-flex justify-content-center h-100">
+					<div class="card">
+					<h5 id="cautionlogin">{{text}}</h5>
+						<div class="card-header">
+							<h3>LOGIN</h3>
+						</div>
+						<div class="card-body">
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user"><img id="usernamelogo" src="{% static 'user.png'%}"></i></span>
+								</div>
+								<input type="text"  id="username" name='username'  class="form-control" placeholder="username">					
+							</div>
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"><img id="passwordlogo" src="{% static 'password.png'%}"></i></span>
+								</div>
+								<input type="password" name='password' id="inputPassword" class="form-control" placeholder="password">
+							</div>				
+							<div class="form-group">
+								<input type="submit" value="Login" class="btn float-right login_btn">
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="d-flex justify-content-center links">
+								Don't have an account?<a id="signupbut" href="{% url 'signup' %}">Sign Up</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<footer id="footerlogin">&copy;2019 IT Crats. All rights reserved.<footer>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "loggedin.html" %}
+{% block contents %}
+{{ code |safe}}
+<div><button type="button" class="btn btn-warning" data-toggle="modal" id="createformbuttonmodal" data-target="#ModalLong" style="margin-left:915px;font-weight:500;font-size:20px;">
+  CREATE 
+</button></div>
+<br><br><br>
+<button class='btn float-left login_btn btn-outline-info' style="margin-left:900px;color:white;font-weight:500;font-size:20px;" onclick='displaycodeforform()' >SourceCode</button><textarea   rows='4' cols='156' id='textarea' style='display:none;' name='area'> {{ code }} </textarea><br><br><br>
+
+
+<div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  	<div class="modal-dialog modal-lg" role="document" style="width:700px;">
+    	<div class="modal-content">
+      	<div class="modal-header">
+        	<h5 class="modal-title" id="exampleModalLongTitle"><em style="font-size:30px;padding:auto;">CREATE YOUR FORM :</em></h5>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button>
+      	</div>
+      	<div class="modal-body">
+        	<form action="{% url 'createform' %}" method='POST'> 
+				{% csrf_token %}
+          		<div id="yourformf">
+            		<div class="inputfieldsf" >
+              			<em style="font-size:25px;">NAME :</em>
+              			<input type="text" class="nameofinput checkbox form-horizontal form-control-lg" name="nameofinput" required>
+              			<em style="font-size:25px;">TYPE :</em>
+              			<select class="inputtypes form-horizontal form-control-lg" name="typeofinput">
+                 			<option value="email" selected="selected">EMAIL</option>
+                 			<option value="text" >TEXT</option>
+                 			<option value="password" >PASSWORD</option>
+                 			<option value="radio" >RADIO</option> 
+                 			<option value="number" >NUMBER</option>
+                 			<option value="file" >FILE</option>
+							<option value="color" >COLOR</option>
+              			</select>
+              			<input type="button" value="+" onclick="myfunction()" class="button  form-horizontal form-control-lg"><br>   
+            		</div>
+          		</div>      
+          		<div class="modal-footer">
+           			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          			<input type="submit" class="btn btn-secondary" value="submit" >
+          		</div>
+        	</form>
+      	</div>
+    	</div>
+  	</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,148 @@
+var p1=0;
+var p2=0;
+var i=1;
+
+var position=1
+var numberofcheckboxes=1
+
+function newrow()
+{
+	var checkbox=document.querySelectorAll('.menucheckbox')[numberofcheckboxes-1];
+	if (checkbox.checked==true)
+	{
+		position+=1
+		var menu=document.querySelector(".menurow").innerHTML;
+		menu="<br>"+menu;
+		document.getElementById("menulist").insertAdjacentHTML("beforeend",menu);
+		document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name=position+"nameofmenu";
+		document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name+=0;
+		numberofcheckboxes+=1
+	}
+}
+
+
+function newcolumn()
+{	
+	var checkbox=document.querySelectorAll('.menucheckbox')[numberofcheckboxes-1];
+	if (checkbox.checked==true)
+	{
+		p1=position
+		var menu=document.querySelector(".menucolumn").innerHTML;
+		document.getElementById("menulist").insertAdjacentHTML("beforeend",menu);
+		if (p1!=p2)
+		{
+			i=1;
+			document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name=i+"nameofmenu";
+			document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name+=position;
+			i+=1;
+		}
+		else
+		{
+			document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name=i+"nameofmenu";
+			document.getElementsByClassName("position")[document.getElementsByClassName("position").length-1].name+=position;
+			i+=1
+		}
+		numberofcheckboxes+=1
+		p2=position
+	}
+}
+
+
+
+
+
+
+
+
+
+def createmenu(request):
+    if request.session.has_key("username"):
+        username=request.session['username']
+        if request.method=="POST":
+            mycode=["<ol>"]
+            var=1
+            pos_name_par=request.POST.get(str(var)+"nameofmenu"+"0")
+            while pos_name_par:
+                pos_name_par="<li>"+str(pos_name_par)+"</li>"
+                mycode.append(pos_name_par)
+                var+=1
+                pos_name_par=request.POST.get(str(var)+"nameofmenu"+"0")
+            mycode.append("</ol>")
+            i=1
+            j=1
+            while i<var+1:
+                if request.POST.get(str(j)+"nameofmenu"+str(i)):
+                    name_par=request.POST.get(str(j)+"nameofmenu"+str(i))
+                    mycode[i]=mycode[i][:(len(mycode[i])-5)]
+                    mycode[i]+="<ol>"+name_par+"</ol>"
+                    mycode[i]+="</ol>"
+                    j+=1
+                else:
+                    i+=1
+                    j=1
+            dbusername = mymenu.objects.filter(username = username)
+            if dbusername:
+	            mymenu.objects.filter(username = username).delete()
+            mycode=" ".join(mycode)
+            a=mymenu(mycode=mycode,username=username)
+            a.save()
+            return redirect("/loggedin")
+        else:
+            return render(request,'menu.html',{'username':username})
+def menus(request):
+    if request.session.has_key("username"):
+        username_f=request.session['username']
+        dbusername = content.objects.filter(username = username_f)
+        if dbusername:
+            list=mymenu.objects.all()
+            for element in list:
+                if element.username==username_f:
+                    mycode=element.mycode
+                    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                    file=open(os.path.join(BASE_DIR, "authentication/templates/mymenu.html"),"w")
+                    mycode="{% extends 'loggedin.html' %}{% block contents %}"+mycode+"{% endblock %}"
+                    file.write(mycode) 
+                    file.close()  
+                    return render(request,'mymenu.html',{'username':username_f}) 
+"""
+code=[""]*len
+for id in range(0,len):
+    code[id]="<ol>"+name+"</ol>"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span id="menulist" style={display:inline} >	
+						
+						<span class="menurow" style={display:inline} >
+							<span class="menucolumn" style={display:inline}>
+								<input type="text"   class="position" name="1nameofmenu0" required>
+								<input type="checkbox" class="menucheckbox" name="checkboxformenu">
+							</span>
+							<input type="button" onclick="newcolumn()" value="+SUBMENU" class="button"> 	 
+						</span>
+					</span>
+					<br>
+      			</div>
+     			<div class="modal-footer">
+        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        			<input type="submit" class="btn btn-primary" value="submit" >
+      			</div>

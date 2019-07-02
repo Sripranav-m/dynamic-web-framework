@@ -1,0 +1,39 @@
+{% extends "loggedin.html" %}
+
+{% block contents %}
+{{ code | safe }}
+<br>
+<br><br>
+<button type="button" class="btn btn-primary" data-toggle="modal" style="margin-left:875px;color:white;font-weight:600;font-size:20px;" data-target="#ModalLong">ADD CONTENT</button>
+	<div class="modal fade bd-example-modal-lg" style="width:90%" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  		<div class="modal-dialog modal-lg" role="document" style="width:90%">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h5 class="modal-title" id="exampleModalLongTitle">ADD CONTENT TO YOUR WEBSITE</h5>
+          			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+          			</button>
+      			</div>
+				<form action="{% url 'contentformenu' name %}" method='POST'  enctype="multipart/form-data">
+				{% csrf_token %} 
+      				<div class="modal-body">
+          				{% csrf_token %} 
+          				{{ form.media }}
+          				{{ form.as_p }}
+						  <br>
+						  <hr>
+						  <br>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        				<input type="submit" class="btn-btn-primary btn" value="submit">
+					</div>
+        		</form>		
+    		</div>
+  		</div>
+	</div>
+	<button type="button" onclick="showmenu_code()" class="btn btn-outline-success" style="margin-left:878px;color:white;font-weight:600;font-size:20px;">
+  		SOURCE CODE
+	</button>
+	<textarea   rows='30' cols='156' id='textareamenu' style='display:none;' name='area'> {{ code }} </textarea>
+{% endblock %}

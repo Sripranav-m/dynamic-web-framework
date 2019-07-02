@@ -1,0 +1,87 @@
+#itcratslogo
+{
+    max-height:200px;
+    max-width:200px;
+    margin-top:-7.8px;
+    margin-bottom:-7.6px;
+    margin-left:-7.9%;
+    margin-right:25%;
+    background: lightblue;
+}
+
+.navtext
+{
+    font-size:21px;
+}
+#loggedinbody
+{
+    /*background-image:url('/static/bgmain.jpg');*/
+    background-color:lightskyblue;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.button
+{
+    color:black;
+    background:lightblue;
+}
+.modal-lg {
+    max-width: 57.4%;
+}
+.navbartext
+{
+    color:black;
+    font-size: 20px;
+    font-weight: 500;
+}
+.navbartext:hover
+{
+    color: white;
+}
+.insidedropdown:hover
+{
+    background-color:  #0087ff;
+}
+.navbarcolor
+{
+    background-color:#0087ff;
+}
+.spaces
+{
+    margin-left:850px;
+    margin-right:100px;
+}
+.dropdown-submenu 
+{
+position: relative;
+}
+.dropdown-submenu .dropdown-menu
+ {
+top: 0;
+left: 100%;
+margin-top: -1px;
+}
+#menudiv
+{
+    padding-left:50px;
+}
+#menucodediv
+{
+    padding-left:30px;
+}
+.navinsertmenu:hover
+{
+    
+    color: white !important;
+}
+.navinsertmenu
+{
+    margin-right:20px;
+}
+.test:hover
+{
+    color:white;
+    background-color:  #0087ff;
+}
+
